@@ -57,7 +57,7 @@ public void user_ensure_to_perform_post_operation_for_with_body_as(String url, D
 //	System.out.println("POST Response url: " + BASE_URL+url);
 	Response response = request.post(url);
 	System.out.println("POST Response status code: " + response.statusCode());
-//	System.out.println("POST Response: " + response.getBody().asPrettyString());
+	System.out.println("POST Response: " + response.getBody().asPrettyString());
 	batchId = response.getBody().jsonPath().getString("batchId");
 	System.out.println("POST Response batchId: " + batchId);
 //	response = request.when().put("/(BatchId)");

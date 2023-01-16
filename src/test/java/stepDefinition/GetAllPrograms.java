@@ -1,7 +1,12 @@
 package stepDefinition;
 
-import org.junit.Assert;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.logging.LogManager;
 
+import org.junit.Assert;
+import org.junit.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,34 +14,45 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
+import io.cucumber.java.Scenario;
+
+
+
 
 public class GetAllPrograms {
+	
 	private static final String BASE_URL="https://lms-backend-service.herokuapp.com/lms";
+	Response response;
 	RequestSpecification request;
-	private static Response response;
-	private static String jsonString;
 	
-
 	
-	@Given("User is on Get Method to get all programs")
-	public void user_is_on_get_method_to_get_all_programs() {
+	@Given("a service with {string}")
+	public void a_service_with(String string) {
+		 RestAssured.baseURI = BASE_URL;
+		  request = RestAssured.given();
+		 RestAssured.baseURI=BASE_URL;
 		
-		RestAssured.baseURI=BASE_URL;
-		request =RestAssured.given();
-		request.header("Content-Type","application/json");
+			request.header("Content-Type","application/json");
+
+	}
+	
+	@When("user sends request to get the program details")
+	public void user_sends_request_to_get_the_program_details() {
+		 response = request.get("/allPrograms");
+		    
+		}
+	    
+	@Then("user should get the response code {int}")
+	public void user_should_get_the_response_code(int responseCode) {
+		int statusCode = response.getStatusCode();
+		  Assert.assertEquals(statusCode, responseCode);
+	   
+
+		
 	}
 
-	@When("User sends the get method with endpoints Allprograms")
-	public void user_sends_the_get_method_with_endpoints_allprograms() {
-		response = request.when().get("/allPrograms");
-	    
-	}
+	
 
-	@Then("The user should get a successful response code {int}")
-	public void the_user_should_get_a_successful_response_code(Integer int1) {
-		@SuppressWarnings("unchecked")
-		int statusCode=((ResponseOptions<Response>) response).getStatusCode();
-	     Assert.assertEquals(statusCode, 200);
-	    
-	}
+
+
 }

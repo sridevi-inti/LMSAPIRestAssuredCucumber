@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-	features = "C:\\Users\\sayis\\eclipse-workspace\\LMSAPIRestAssuredCucumber\\Features", 
+	features = "src/test/resources/Features", 
 	glue = { "stepDefinition" }, 
 	monochrome = true, 
 	plugin = { 
