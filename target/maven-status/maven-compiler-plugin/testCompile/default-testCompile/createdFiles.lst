@@ -1,4 +1,0 @@
-stepDefinition\GetAllPrograms.class
-Runner\TestRunner.class
-stepDefinition\UpdateBatchById.class
-stepDefinition\updateProgramByName.class
