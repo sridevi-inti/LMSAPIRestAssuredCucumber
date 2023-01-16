@@ -28,3 +28,6 @@ hs_err_pid*
 target/
 allure-results/
 ExtentReports/
+.settings/org.eclipse.jdt.core.prefs
+.project
+.classpath
