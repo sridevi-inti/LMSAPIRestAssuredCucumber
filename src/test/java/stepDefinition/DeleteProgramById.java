@@ -22,10 +22,8 @@ public class DeleteProgramById {
 	Response response;
 	String programId;
 	
-	@Given("I perform POST operation for the {string} with body as")
-	public void i_perform_post_operation_for_the_with_body_as(String url, DataTable table) {
-		  RestAssured.baseURI = BASEURL;
-		  request = RestAssured.given();
+	@Given("User perform POST operation for the {string} with body as")
+	public void i_perform_post_method_for_with_body_as(String url, DataTable table) {
 		List<List<String>> data = table.asLists(String.class);
     	Map<String, Object>  body = new HashMap<>();
     	body.put("programName", data.get(1).get(0));
@@ -37,18 +35,22 @@ public class DeleteProgramById {
 
     	body.put("creationTime", stringDate);
     	body.put("lastModTime", stringDate);
-    	
+    	request = RestAssured.given();
+    	request.header("Content-Type", "application/json");
+    	request.baseUri(BASEURL);
     	request.body(body);
     	response = request.post(url);
     	programId = response.getBody().jsonPath().getString("programId");
 	}
-	@When("user send the delete request {string}" )
-	public void user_send_the_delete_request_deletebyprogid(String url) {
+	
+	@When("user send the delete request {string}")
+	public void user_send_the_delete_method_deletebyprogid(String url) {
 		 response = request.when().delete(url +"/"+programId);	
 
 	}
+	
 	@Then("user should get success code {int}")
-	public void user_should_get_success_code(int responseCode) {
+	public void I_should_get_success_code(int responseCode) {
 		int statusCode = response.getStatusCode();
 		  Assert.assertEquals(statusCode, responseCode);
 	}
