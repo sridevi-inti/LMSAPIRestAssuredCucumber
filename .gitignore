@@ -29,5 +29,4 @@ target/
 allure-results/
 ExtentReports/
 .settings/org.eclipse.jdt.core.prefs
-.project
-.classpath
+
