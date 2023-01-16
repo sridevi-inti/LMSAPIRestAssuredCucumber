@@ -95,10 +95,11 @@ public void user_sends_the_put_request_using_updated_batch_id_with_body_as(Strin
 	
 }
 
-@When("^User sends the get request using Batch name as \"([^\"]*)\"$")
-public void user_sends_the_get_request_using_Batch_name(String batchName) {
-	response = request.when().get("/batches/batchName"+ "/" + batchName);
+@When("User sends the get request with {string} using Batch name as {string}")
+public void user_sends_the_get_request_using_Batch_name(String url, String batchName) {
+	response = request.when().get(url + "/" + batchName);
 }
+
 	
 @Then("Status code should be {int} ok")
 public void status_code_should_be_ok(Integer int1) {
